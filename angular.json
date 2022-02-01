@@ -3,5 +3,206 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-  }
+    "me-svgedit": {
+      "projectType": "library",
+      "root": "projects/me-svgedit",
+      "sourceRoot": "projects/me-svgedit/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-builders/custom-webpack:browser",
+          "options": {
+            "outputPath": "dist/me-svgedit",
+            "main": "projects/me-svgedit/src/public-api.ts",
+            "tsConfig": "projects/me-svgedit/tsconfig.lib.json",
+            "project": "projects/me-svgedit/ng-package.json",
+            "customWebpackConfig": {
+              "path": "webpack.config.js",
+              "replaceDuplicatePlugins": true
+            },
+            "allowedCommonJsDependencies": [
+              "core-js",
+              "@babel/runtime",
+              "raf"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/me-svgedit/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/me-svgedit/src/test.ts",
+            "tsConfig": "projects/me-svgedit/tsconfig.spec.json",
+            "karmaConfig": "projects/me-svgedit/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/me-svgedit/tsconfig.lib.json",
+              "projects/me-svgedit/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "me-svg-edit-showcase": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/me-svg-edit-showcase",
+      "sourceRoot": "projects/me-svg-edit-showcase/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-builders/custom-webpack:browser",
+          "options": {
+            "outputPath": "dist/me-svg-edit-showcase",
+            "index": "projects/me-svg-edit-showcase/src/index.html",
+            "main": "projects/me-svg-edit-showcase/src/main.ts",
+            "polyfills": "projects/me-svg-edit-showcase/src/polyfills.ts",
+            "tsConfig": "projects/me-svg-edit-showcase/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/me-svg-edit-showcase/src/favicon.ico",
+              "projects/me-svg-edit-showcase/src/assets",
+              {
+                "glob": "**/*",
+                "input": "./node_modules/svgedit/src/editor/images",
+                "output": "me-svgedit/images"
+              },
+              {
+                "glob": "**/*",
+                "input": "./node_modules/svgedit/src/editor/locale",
+                "output": "me-svgedit/locale"
+              },
+              {
+                "glob": "**/*",
+                "input": "./node_modules/svgedit/src/editor/extensions",
+                "output": "me-svgedit/extensions"
+              },
+              {
+                "glob": "**/*",
+                "input": "./node_modules/svgedit/src/editor/components/jgraduate/images",
+                "output": "me-svgedit/images"
+              }
+            ],
+            "styles": [
+              "projects/me-svg-edit-showcase/src/styles.scss"
+            ],
+            "scripts": [],
+            "customWebpackConfig": {
+              "path": "./webpack.config.js",
+              "replaceDuplicatePlugins": true
+            },
+            "allowedCommonJsDependencies": [
+              "core-js",
+              "@babel/runtime",
+              "raf"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/me-svg-edit-showcase/src/environments/environment.ts",
+                  "with": "projects/me-svg-edit-showcase/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-builders/custom-webpack:dev-server",
+          "options": {
+            "browserTarget": "me-svg-edit-showcase:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "me-svg-edit-showcase:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "me-svg-edit-showcase:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/me-svg-edit-showcase/src/test.ts",
+            "polyfills": "projects/me-svg-edit-showcase/src/polyfills.ts",
+            "tsConfig": "projects/me-svg-edit-showcase/tsconfig.spec.json",
+            "karmaConfig": "projects/me-svg-edit-showcase/karma.conf.js",
+            "assets": [
+              "projects/me-svg-edit-showcase/src/favicon.ico",
+              "projects/me-svg-edit-showcase/src/assets"
+            ],
+            "styles": [
+              "projects/me-svg-edit-showcase/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/me-svg-edit-showcase/tsconfig.app.json",
+              "projects/me-svg-edit-showcase/tsconfig.spec.json",
+              "projects/me-svg-edit-showcase/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/me-svg-edit-showcase/e2e/protractor.conf.js",
+            "devServerTarget": "me-svg-edit-showcase:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "me-svg-edit-showcase:serve:production"
+            }
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "me-svg-edit-showcase"
 }
