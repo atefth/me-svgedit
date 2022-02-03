@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import Editor from 'svgedit/src/editor/Editor.js';
+import Editor from 'svgedit/dist/editor/Editor.js';
 import 'svgedit/src/editor/svgedit.css';
 
 @Component({
