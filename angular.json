@@ -10,19 +10,10 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-builders/custom-webpack:browser",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/me-svgedit/tsconfig.lib.json",
-            "project": "projects/me-svgedit/ng-package.json",
-            "customWebpackConfig": {
-              "path": "webpack.config.js"
-            },
-            "replaceDuplicatePlugins": true,
-            "allowedCommonJsDependencies": [
-              "core-js",
-              "@babel/runtime",
-              "raf"
-            ]
+            "project": "projects/me-svgedit/ng-package.json"
           },
           "configurations": {
             "production": {
@@ -78,28 +69,33 @@
               {
                 "glob": "**/*",
                 "input": "./node_modules/svgedit/src/editor/images",
-                "output": "me-svgedit/images"
+                "output": "/me-svgedit/images"
               },
               {
                 "glob": "**/*",
                 "input": "./node_modules/svgedit/src/editor/locale",
-                "output": "me-svgedit/locale"
+                "output": "/me-svgedit/locale"
               },
               {
                 "glob": "**/*",
                 "input": "./node_modules/svgedit/src/editor/extensions",
-                "output": "me-svgedit/extensions"
+                "output": "/me-svgedit/extensions"
               },
               {
                 "glob": "**/*",
-                "input": "./node_modules/svgedit/src/editor/components/jgraduate/images",
-                "output": "me-svgedit/images"
+                "input": "./node_modules/svgedit/src/editor/components/jgraduate",
+                "output": "/me-svgedit/jgraduate"
               }
             ],
             "styles": [
-              "projects/me-svg-edit-showcase/src/styles.scss"
+              "projects/me-svg-edit-showcase/src/styles.scss",
+              {
+                "input": "./node_modules/svgedit/src/editor/svgedit.css"
+              }
             ],
-            "scripts": [],
+            "scripts": [{
+              "input": "./node_modules/svgedit/src/editor/Editor.js"
+            }],
             "customWebpackConfig": {
               "path": "./webpack.config.js",
               "mergeRules": {
