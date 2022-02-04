@@ -5,26 +5,18 @@ import 'xsvgedit/src/editor/svgedit.css';
 @Component({
   selector: 'lib-me-svgedit',
   template: `
-    <div id="me-svgedit-container" style="width:100%; height:100vh"></div>
+    <div id="me-svgedit-container" style="width:100%; height: 100vh"></div>
   `
 })
 export class MeSvgeditComponent {
+  svgEditor: Editor;
   config: any = {
-    allowInitialUserOverride: true,
-    noDefaultExtensions: true,
     langPath: 'me-svgedit/locale',
     extPath: 'me-svgedit/extensions',
     canvgPath: 'canvg',
     jspdfPath: 'jspdf',
     imgPath: 'me-svgedit/images',
-    jGraduatePath: 'me-svgedit/jgraduate',
-    // dimensions: [640, 480],
-    // gridSnapping: false,
-    gridColor: '#000',
-    baseUnit: 'px',
-    snappingStep: 10,
-    showRulers: true,
-    showGrid: true
+    jGraduatePath: 'me-svgedit/jgraduate'
   };
 
   configure(configurations: any): void {
@@ -33,9 +25,17 @@ export class MeSvgeditComponent {
         this.config[key] = configurations[key];
       });
     }
-    const svgEditor = new Editor(document.getElementById('me-svgedit-container'));
-    svgEditor.init();
-    svgEditor.setConfig(this.config);
+    this.svgEditor = new Editor(document.getElementById('me-svgedit-container'));
+    this.svgEditor.init();
+    this.svgEditor.setConfig(this.config);
+  }
+
+  loadSvg(url: string): void {
+    this.svgEditor.loadSvg(url);
+  }
+
+  editorInstance(): Editor {
+    return this.svgEditor;
   }
 
 }
