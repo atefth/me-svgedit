@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import Editor from 'xsvgedit/dist/editor/Editor.js';
 import 'xsvgedit/src/editor/svgedit.css';
 
@@ -8,7 +8,7 @@ import 'xsvgedit/src/editor/svgedit.css';
     <div id="me-svgedit-container" style="width:100%; height: 100%"></div>
   `
 })
-export class MeSvgeditComponent {
+export class MeSvgeditComponent implements AfterViewInit {
   svgEditor: Editor;
   config: any = {
     langPath: 'me-svgedit/locale',
@@ -19,7 +19,7 @@ export class MeSvgeditComponent {
     jGraduatePath: 'me-svgedit/jgraduate'
   };
 
-  constructor() {
+  ngAfterViewInit(): void {
     this.svgEditor = new Editor(document.getElementById('me-svgedit-container'));
     this.svgEditor.init();
   }
