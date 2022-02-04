@@ -8,7 +8,7 @@ import 'xsvgedit/src/editor/svgedit.css';
     <div id="me-svgedit-container" style="width:100%; height: 100%"></div>
   `
 })
-export class MeSvgeditComponent implements AfterViewInit {
+export class MeSvgeditComponent {
   svgEditor: Editor;
   config: any = {
     langPath: 'me-svgedit/locale',
@@ -19,17 +19,14 @@ export class MeSvgeditComponent implements AfterViewInit {
     jGraduatePath: 'me-svgedit/jgraduate'
   };
 
-  ngAfterViewInit(): void {
-    this.svgEditor = new Editor(document.getElementById('me-svgedit-container'));
-    this.svgEditor.init();
-  }
-
   configure(configurations: any): void {
     if (Object.keys(configurations)) {
       Object.keys(configurations).forEach(key => {
         this.config[key] = configurations[key];
       });
     }
+    this.svgEditor = new Editor(document.getElementById('me-svgedit-container'));
+    this.svgEditor.init();
     this.svgEditor.setConfig(this.config);
   }
 
