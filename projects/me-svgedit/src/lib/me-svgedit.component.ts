@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import Editor from 'svgedit/dist/editor/Editor.js';
-import 'svgedit/src/editor/svgedit.css';
+import { Component } from '@angular/core';
+import Editor from 'xsvgedit/dist/editor/Editor.js';
+import 'xsvgedit/src/editor/svgedit.css';
 
 @Component({
   selector: 'lib-me-svgedit',
@@ -8,7 +8,7 @@ import 'svgedit/src/editor/svgedit.css';
     <div id="me-svgedit-container" style="width:100%; height:100vh"></div>
   `
 })
-export class MeSvgeditComponent implements OnInit {
+export class MeSvgeditComponent {
   config: any = {
     allowInitialUserOverride: true,
     noDefaultExtensions: true,
@@ -27,15 +27,12 @@ export class MeSvgeditComponent implements OnInit {
     showGrid: true
   };
 
-  // constructor(configurations: { [key: string]: any }) {
-  //   if (Object.keys(configurations)) {
-  //     Object.keys(configurations).forEach(key => {
-  //       this.config[key] = configurations[key];
-  //     });
-  //   }
-  // }
-
-  ngOnInit(): void {
+  configure(configurations: any): void {
+    if (Object.keys(configurations)) {
+      Object.keys(configurations).forEach(key => {
+        this.config[key] = configurations[key];
+      });
+    }
     const svgEditor = new Editor(document.getElementById('me-svgedit-container'));
     svgEditor.init();
     svgEditor.setConfig(this.config);

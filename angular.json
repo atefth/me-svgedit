@@ -68,29 +68,29 @@
               "projects/me-svg-edit-showcase/src/assets",
               {
                 "glob": "**/*",
-                "input": "./node_modules/svgedit/src/editor/images",
+                "input": "./node_modules/xsvgedit/src/editor/images",
                 "output": "/me-svgedit/images"
               },
               {
                 "glob": "**/*",
-                "input": "./node_modules/svgedit/src/editor/locale",
+                "input": "./node_modules/xsvgedit/src/editor/locale",
                 "output": "/me-svgedit/locale"
               },
               {
                 "glob": "**/*",
-                "input": "./node_modules/svgedit/src/editor/extensions",
+                "input": "./node_modules/xsvgedit/src/editor/extensions",
                 "output": "/me-svgedit/extensions"
               },
               {
                 "glob": "**/*",
-                "input": "./node_modules/svgedit/src/editor/components/jgraduate",
+                "input": "./node_modules/xsvgedit/src/editor/components/jgraduate",
                 "output": "/me-svgedit/jgraduate"
               }
             ],
             "styles": [
               "projects/me-svg-edit-showcase/src/styles.scss",
               {
-                "input": "./node_modules/svgedit/src/editor/svgedit.css"
+                "input": "./node_modules/xsvgedit/src/editor/svgedit.css"
               }
             ],
             "scripts": [],

@@ -21,8 +21,8 @@
     "@angular/router": "~12.2.16",
     "@babel/plugin-proposal-nullish-coalescing-operator": "^7.16.7",
     "rxjs": "~6.6.0",
-    "svgedit": "^7.1.1",
     "tslib": "^2.0.0",
+    "xsvgedit": "0.0.1",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
