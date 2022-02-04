@@ -3,7 +3,11 @@
   "version": "0.0.1",
   "peerDependencies": {
     "@angular/common": "^11.2.14",
-    "@angular/core": "^11.2.14"
+    "@angular/core": "^11.2.14",
+    "xsvgedit": "0.0.1",
+    "qr-manipulation": "^0.7.0",
+    "query-result": "^1.0.5",
+    "jamilih": "^0.54.0"
   },
   "dependencies": {
     "tslib": "^2.0.0"
