@@ -19,19 +19,22 @@ export class MeSvgeditComponent {
     jGraduatePath: 'me-svgedit/jgraduate'
   };
 
+  constructor() {
+    this.svgEditor = new Editor(document.getElementById('me-svgedit-container'));
+    this.svgEditor.init();
+  }
+
   configure(configurations: any): void {
     if (Object.keys(configurations)) {
       Object.keys(configurations).forEach(key => {
         this.config[key] = configurations[key];
       });
     }
-    this.svgEditor = new Editor(document.getElementById('me-svgedit-container'));
-    this.svgEditor.init();
     this.svgEditor.setConfig(this.config);
   }
 
   loadSvg(url: string): void {
-    this.svgEditor.loadSvg(url);
+    this.svgEditor.loadFromURL(url);
   }
 
   editorInstance(): Editor {
