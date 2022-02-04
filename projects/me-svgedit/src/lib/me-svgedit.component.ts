@@ -5,7 +5,7 @@ import 'xsvgedit/src/editor/svgedit.css';
 @Component({
   selector: 'lib-me-svgedit',
   template: `
-    <div id="me-svgedit-container" style="width:100%; height: 100vh"></div>
+    <div id="me-svgedit-container" style="width:100%; height: 100%"></div>
   `
 })
 export class MeSvgeditComponent {
