@@ -89,9 +89,7 @@
             ],
             "styles": [
               "projects/me-svg-edit-showcase/src/styles.scss",
-              {
-                "input": "./node_modules/xsvgedit/src/editor/svgedit.css"
-              }
+              "projects/me-svg-edit/assets/styles.scss"
             ],
             "scripts": [],
             "customWebpackConfig": {

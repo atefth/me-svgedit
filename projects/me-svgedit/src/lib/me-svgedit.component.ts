@@ -1,4 +1,4 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import Editor from 'xsvgedit/dist/editor/Editor.js';
 import 'xsvgedit/src/editor/svgedit.css';
 
