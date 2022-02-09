@@ -14,7 +14,7 @@ export class MeSvgeditComponent {
     canvgPath: 'canvg',
     jspdfPath: 'jspdf',
     imgPath: 'me-svgedit/images',
-    jGraduatePath: 'me-svgedit/jgraduate',
+    jGraduatePath: 'me-svgedit/jgraduate'
   };
 
   configure(configurations: any): void {
