@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import Editor from 'xsvgedit/dist/editor/Editor.js';
 import 'xsvgedit/src/editor/svgedit.css';
 
@@ -7,6 +7,7 @@ import 'xsvgedit/src/editor/svgedit.css';
   template: ` <div id="me-svgedit-container" style="width:100%; height: 100%"></div> `,
 })
 export class MeSvgeditComponent {
+  @Output() svgBlobEvent = new EventEmitter<Blob>();
   svgEditor: Editor;
   config: any = {
     langPath: 'me-svgedit/locale',
@@ -28,17 +29,12 @@ export class MeSvgeditComponent {
     this.svgEditor.setConfig(this.config);
 
     setTimeout(() => {
-      this.svgEditor.svgCanvas.$id('tool_save').addEventListener('click', () => {
-        const blob = this.getBlob();
-        return blob;
-      });
-      this.svgEditor.svgCanvas.$id('tool_save_as').addEventListener('click', () => {
-        const blob = this.getBlob();
-        return blob;
-      });
+      this.svgEditor.svgCanvas.$id('tool_save').addEventListener('click', () => this.svgBlobEvent.emit(this.getBlob()));
+      this.svgEditor.svgCanvas.$id('tool_save_as').addEventListener('click', () => this.svgBlobEvent.emit(this.getBlob()));
     }, 1000);
   }
-  getBlob() {
+  
+  getBlob(): Blob {
     const b64toBlob = (b64Data, contentType = '', sliceSize = 512) => {
       const byteCharacters = atob(b64Data);
       const byteArrays = [];
@@ -56,7 +52,7 @@ export class MeSvgeditComponent {
     };
     const svg = '<?xml version="1.0"?>\n' + this.svgEditor.svgCanvas.svgCanvasToString();
     const b64Data = this.svgEditor.svgCanvas.encode64(svg);
-    const blob = b64toBlob(b64Data, 'image/svg+xml');
+    return b64toBlob(b64Data, 'image/svg+xml');
   }
 
   loadSvg(url: string): void {
