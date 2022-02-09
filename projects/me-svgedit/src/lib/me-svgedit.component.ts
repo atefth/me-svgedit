@@ -28,12 +28,21 @@ export class MeSvgeditComponent {
     this.svgEditor.init();
     this.svgEditor.setConfig(this.config);
 
-    setTimeout(() => {
-      this.svgEditor.svgCanvas.$id('tool_save').addEventListener('click', () => this.svgBlobEvent.emit(this.getBlob()));
-      this.svgEditor.svgCanvas.$id('tool_save_as').addEventListener('click', () => this.svgBlobEvent.emit(this.getBlob()));
-    }, 1000);
+    // setTimeout(() => {
+    //   this.getDomElement('tool_save')
+    //   this.getDomElement('tool_save_as')
+    //   // this.svgEditor.svgCanvas.$id('tool_save').addEventListener('click', () => this.svgBlobEvent.emit(this.getBlob()));
+    //   // this.svgEditor.svgCanvas.$id('tool_save_as').addEventListener('click', () => this.svgBlobEvent.emit(this.getBlob()));
+    // }, 1000);
   }
-  
+
+  getDomElement(id: string) {
+    return this.svgEditor.svgCanvas.$id(id);
+  }
+
+  //method takes string and gets the canvas.id from dom. Without event listener
+  //then add event listener
+
   getBlob(): Blob {
     const b64toBlob = (b64Data, contentType = '', sliceSize = 512) => {
       const byteCharacters = atob(b64Data);
