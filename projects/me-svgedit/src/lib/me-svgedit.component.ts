@@ -28,6 +28,38 @@ export class MeSvgeditComponent {
     this.svgEditor = new Editor(document.getElementById('me-svgedit-container'));
     this.svgEditor.init();
     this.svgEditor.setConfig(this.config);
+    
+    const b64toBlob = (b64Data, contentType = '', sliceSize = 512) => {
+      const byteCharacters = atob(b64Data)
+      const byteArrays = []
+      for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+        const slice = byteCharacters.slice(offset, offset + sliceSize)
+        const byteNumbers = new Array(slice.length)
+        for (let i = 0; i < slice.length; i++) {
+          byteNumbers[i] = slice.charCodeAt(i)
+        }
+        const byteArray = new Uint8Array(byteNumbers)
+        byteArrays.push(byteArray)
+      }
+      const blob = new Blob(byteArrays, { type: contentType })
+      return blob
+    }
+    setTimeout(() => {
+      this.svgEditor.svgCanvas.$id('tool_save').addEventListener('click', () => {
+        const svg = '<?xml version="1.0"?>\n' + this.svgEditor.svgCanvas.svgCanvasToString()
+      const b64Data = this.svgEditor.svgCanvas.encode64(svg)
+      const blob = b64toBlob(b64Data, 'image/svg+xml')
+      return blob
+      })
+    }, 1000)
+    setTimeout(() => {
+      this.svgEditor.svgCanvas.$id('tool_save_as').addEventListener('click', () => {
+        const svg = '<?xml version="1.0"?>\n' + this.svgEditor.svgCanvas.svgCanvasToString()
+      const b64Data = this.svgEditor.svgCanvas.encode64(svg)
+      const blob = b64toBlob(b64Data, 'image/svg+xml')
+      return blob
+      })
+    }, 1000)
   }
 
   loadSvg(url: string): void {
