@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, Input, AfterViewInit } from '@angular/core';
 import Editor from 'xsvgedit/dist/editor/Editor.js';
 import 'xsvgedit/src/editor/svgedit.css';
 
@@ -7,7 +7,8 @@ import 'xsvgedit/src/editor/svgedit.css';
   template: `
     <div id="me-svgedit-container" style="width:100%; height: 100%"></div> `,
 })
-export class MeSvgeditComponent {
+export class MeSvgeditComponent implements AfterViewInit {
+  @Input() configurations: any;
   @Output() svgBlobEvent = new EventEmitter<Blob>();
   svgEditor: Editor;
   config: any = {
@@ -19,10 +20,10 @@ export class MeSvgeditComponent {
     jGraduatePath: 'me-svgedit/jgraduate'
   };
 
-  configure(configurations: any): void {
-    if (Object.keys(configurations)) {
-      Object.keys(configurations).forEach((key) => {
-        this.config[key] = configurations[key];
+  ngAfterViewInit(): void {
+    if (Object.keys(this.configurations)) {
+      Object.keys(this.configurations).forEach((key) => {
+        this.config[key] = this.configurations[key];
       });
     }
     this.svgEditor = new Editor(document.getElementById('me-svgedit-container'));
