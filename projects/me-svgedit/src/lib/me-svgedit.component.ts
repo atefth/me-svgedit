@@ -4,7 +4,8 @@ import 'xsvgedit/src/editor/svgedit.css';
 
 @Component({
   selector: 'lib-me-svgedit',
-  template: ` <div id="me-svgedit-container" style="width:100%; height: 100%"></div> `,
+  template: `
+    <div id="me-svgedit-container" style="width:100%; height: 100%"></div> `,
 })
 export class MeSvgeditComponent {
   @Output() svgBlobEvent = new EventEmitter<Blob>();
@@ -27,41 +28,6 @@ export class MeSvgeditComponent {
     this.svgEditor = new Editor(document.getElementById('me-svgedit-container'));
     this.svgEditor.init();
     this.svgEditor.setConfig(this.config);
-
-    // setTimeout(() => {
-    //   this.getDomElement('tool_save')
-    //   this.getDomElement('tool_save_as')
-    //   // this.svgEditor.svgCanvas.$id('tool_save').addEventListener('click', () => this.svgBlobEvent.emit(this.getBlob()));
-    //   // this.svgEditor.svgCanvas.$id('tool_save_as').addEventListener('click', () => this.svgBlobEvent.emit(this.getBlob()));
-    // }, 1000);
-  }
-
-  getDomElement(id: string) {
-    return this.svgEditor.svgCanvas.$id(id);
-  }
-
-  //method takes string and gets the canvas.id from dom. Without event listener
-  //then add event listener
-
-  getBlob(): Blob {
-    const b64toBlob = (b64Data, contentType = '', sliceSize = 512) => {
-      const byteCharacters = atob(b64Data);
-      const byteArrays = [];
-      for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
-        const slice = byteCharacters.slice(offset, offset + sliceSize);
-        const byteNumbers = new Array(slice.length);
-        for (let i = 0; i < slice.length; i++) {
-          byteNumbers[i] = slice.charCodeAt(i);
-        }
-        const byteArray = new Uint8Array(byteNumbers);
-        byteArrays.push(byteArray);
-      }
-      const blob = new Blob(byteArrays, { type: contentType });
-      return blob;
-    };
-    const svg = '<?xml version="1.0"?>\n' + this.svgEditor.svgCanvas.svgCanvasToString();
-    const b64Data = this.svgEditor.svgCanvas.encode64(svg);
-    return b64toBlob(b64Data, 'image/svg+xml');
   }
 
   loadSvg(url: string): void {
