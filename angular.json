@@ -89,7 +89,7 @@
             ],
             "styles": [
               "projects/me-svg-edit-showcase/src/styles.scss",
-              "projects/me-svg-edit/assets/styles.scss"
+              "projects/me-svgedit/assets/style.scss"
             ],
             "scripts": [],
             "customWebpackConfig": {
