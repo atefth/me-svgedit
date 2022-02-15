@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MeSvgeditComponent } from '../../../me-svgedit/src/lib/me-svgedit.component';
 
 @Component({
@@ -6,7 +6,11 @@ import { MeSvgeditComponent } from '../../../me-svgedit/src/lib/me-svgedit.compo
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit {
   configurations = {showGrid: false};
   @ViewChild(MeSvgeditComponent) meSvgedit;
+
+  ngAfterViewInit(): void {
+    this.meSvgedit.init();
+  }
 }
