@@ -19,6 +19,7 @@ export class MeSvgeditComponent {
     imgPath: 'me-svgedit/images',
     jGraduatePath: 'me-svgedit/jgraduate'
   };
+  public initialised = false;
 
   init(): void {
     if (Object.keys(this.configurations)) {
@@ -29,6 +30,7 @@ export class MeSvgeditComponent {
     this.svgEditor = new Editor(document.getElementById('me-svgedit-container'));
     this.svgEditor.init();
     this.svgEditor.setConfig(this.config);
+    this.initialised = true;
   }
 
   loadSvg(url: string): void {
